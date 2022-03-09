@@ -1,0 +1,68 @@
+{% extends 'main_tamplates.html' %}
+
+{% block title %}
+Панель администратора
+{% endblock %}
+
+{% block main %}
+{% if current_user.role =='admin' %}
+<div class = "container mt-1">
+    <h1>Все пользователи</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">Действие</th>
+        </tr>
+        </thead>
+
+        <tr>
+            {% if users|length>0 %}
+
+            {% for element in users %}
+
+            <th scope="row">{{element.user_id}}</th>
+            <td>{{element.name}}</td>
+            <td>{{element.tel}}</td>
+            <td><a href="/customers/{{element.user_id}}/delete" class="btn btn-danger" data-toggle="tooltip"
+                   title="Перейти на страницу задания">Удалить</a>
+                <a href="/customers/{{element.user_id}}/" class="btn btn-warning" data-toggle="tooltip"
+                   title="Перейти на страницу задания">Назначить администратором</a>
+<!--                TODO-->
+            </td>
+
+        </tr>
+    
+        {% endfor %}
+
+
+
+        {% endif %}
+ <hr>
+
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    404 Not Found</h2>
+                <div class="error-details">
+                    Sorry, an error has occured, Requested page not found!
+                </div>
+                <div class="error-actions">
+                    <a href="/home" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                        Take Me Home </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+        {% endblock %}

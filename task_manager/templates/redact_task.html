@@ -1,0 +1,16 @@
+{% extends 'main_tamplates.html' %}
+
+{% block title %}
+Task update
+{% endblock %}
+
+{% block main %}
+<div class = "container mt-1">
+    <h1>Обновление задания</h1>
+    <form method="post">
+        <input type="text" name="names" id="names" class="form-control" value="{{task_detail.name}}" placeholder="Введите кому отправить задание"><br>
+        <textarea name="task" id="task" class="form-control" placeholder="Введите текст задания">{{task_detail.task}}</textarea><br>
+        <input type="submit" class="btn btn-success" value="Обновить"><br>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'main_tamplates.html' %}
+
+{% block title %}
+Home page
+{% endblock %}
+{% block main %}
+
+        
+ <div class='container mt-3'>
+     <div class> </div>
+     <div class='row row-flex'>
+
+        <div class="col-sm ">
+            <div class="bg-light rounded">
+            <div class='display-6 text-center text-primary'>
+            Заданий</div>
+            <div id="out" class="out-num display-6 text-center text-primary">0</div></div>
+        </div>
+         <div class="col-sm     ">
+              <div class="bg-light rounded">
+            <div class='display-6 text-center text-primary'>
+           Пользователей</div>
+            <div class="out-num display-6 text-center text-primary">{{users|length}}</div></div>
+        </div>
+        <div class="col-sm">
+             <div class="bg-light rounded">
+            <div class='display-6 text-center text-primary'>
+           ЧТОТОЕЩЕ</div>
+            <div class="out-num display-6 text-center text-primary">999</div></div>
+        </div>
+    </div>
+</div>
+
+<script>
+const time = 1000;
+const step = 1;
+
+function outNum(num, elem) {
+  let e = document.querySelector("#out");
+  n = 0;
+  let t = Math.round(time / (num / step));
+  let interval = setInterval(() => {
+    n = n + step;
+    if (n == num) {
+      clearInterval(interval);
+    }
+    e.innerHTML = n;
+  }, t);
+}
+
+outNum({{all_tasks|length}}, "#out");
+</script>
+
+{% endblock %}

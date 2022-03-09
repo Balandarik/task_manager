@@ -1,0 +1,99 @@
+{% extends 'main_tamplates.html' %}
+
+{% block title %}
+All tasks
+{% endblock %}
+
+{% block main %}
+<div class = "container mt-1">
+        <div class="row">
+        <div class="col-md-auto">
+            <h1>Все задания</h1>
+        </div>
+        <div class="col-sm">
+        </div>
+        <div class="col-md-auto" style="margin-top:5px">
+            <input type="button" id="hider" value="Показать мои" class="btn btn-success" style="margin-top:5px"/>
+            <input type="button" id="hider1" value="Показать все" class="btn btn-success" style="margin-top:5px"/>
+            <input type="button" id="hider2" value="Показать новые" class="btn btn-success" style="margin-top:5px"/>
+            <input type="button" id="hider3" value="Скрыть выполненные" class="btn btn-success" style="margin-top:5px" />
+        </div>
+    </div>
+
+    {% if all_tasks|length>0 %}
+
+        {% for element in all_tasks %}
+
+        {%if element.viewed==0 and element.name==current_user.name%}
+            <div class="alert alert-warning" id="{{element.check}}">
+            {%else%}
+            <div class="alert alert-info" name="{{element.name}}" id="{{element.check}}s">
+            {%endif%}
+            <h2>Исполнитель: {{element.name}}</h2>
+            <p class="d-inline-block text-truncate" style="max-width: 350px">Задание: {{ element.task }}</p>
+            <p><b>Дата: {{element.date.date()}}</b></p>
+            {%if element.check==True%}
+            <p><b>Статус: Выполнено</b></p>
+                {% if element.who==current_user.user_id %}
+                <a href="/All_tasks/{{element.id}}/delete" class="btn btn-danger" data-toggle="tooltip" title="ВНИМАНИЕ! отменить удаление невозможно">Удалить</a>
+                {% endif %}
+            {% else %}
+            <p><b>Статус: Ожидает выполнения</b></p>
+            {% endif %}
+            <a href="/All_tasks/{{element.id}}" class="btn btn-warning" data-toggle="tooltip" title="Перейти на страницу задания">Просмотреть детальнее</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="m-b-0">Пока еще нет заданий или все задания выполнены</p>
+    {% endif %}
+
+
+    <script>
+         document.getElementById('hider1').onclick = function() {
+         var divsToHide = document.getElementsByClassName("alert alert-info");
+    for(var i = 0; i < divsToHide.length; i++){
+        divsToHide[i].style.display = "block";
+
+    }
+    }
+    </script>
+
+    <script>
+        document.getElementById('hider2').onclick = function() {
+    var divsToHide = document.getElementsByClassName("alert alert-info");
+    for(var i = 0; i < divsToHide.length; i++){
+        divsToHide[i].style.display = "none";
+
+    }
+
+    }
+
+    </script>
+<script>
+
+    document.getElementById('hider').onclick = function() {
+    var divsToHide = document.getElementsByClassName("alert alert-info");
+    for(var i = 0; i < divsToHide.length; i++){
+        divsToHide[i].style.display = "none";
+    }
+    var divsToHide = document.getElementsByName("{{current_user.name}}");
+    for(var i = 0; i < divsToHide.length; i++){
+        divsToHide[i].style.display = "block";
+
+    }
+    }
+</script>
+<script>
+
+    document.getElementById('hider3').onclick = function() {
+    var divsToHide = document.getElementsByClassName("alert alert-info");
+    for(var i = 0; i < divsToHide.length; i++){
+        if  (divsToHide[i].id=="Trues"){
+            divsToHide[i].style.display = "none";
+                                        }
+
+                            }
+            }
+</script>
+{% endblock %}

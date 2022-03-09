@@ -1,0 +1,62 @@
+{% extends 'main_tamplates.html' %}
+
+{% block title %}
+Task detail
+{% endblock %}
+
+{% block main %}
+<div class = "container mt-1">
+    <h1>Задание для {{task_detail.name}}</h1>
+    <div class="alert alert-info">
+        <p>Задание: {{ task_detail.task }}</p>
+        <p>Задание от: {{users}}</p>
+        <p><b>Дата: {{task_detail.date.date()}}</b></p>
+
+        {% if task_detail.name==current_user.name %}
+        <form class="form-inline" method="post" enctype=multipart/form-data>
+            {% if task_detail.report!=None%}
+            <div class="row">
+            <div class="col-auto">
+            <p>Отчет о выполнении задания: {{task_detail.report}}</p>
+            </div>
+                <div class="col-auto">
+                    {% if task_detail.path!=None %}
+                    <a href="/media/{{task_detail.path}}" class="btn btn-link" style="margin-top:-7px">Скачать файл</a>
+                    {% endif %}
+                </div>
+                <div class="col-auto">
+                </div>
+            </div>
+            {%endif%}
+            <input type="text" id="report" name="report" class="form-control mt-0" id="staticEmail2"
+                   placeholder="Отчет о выполнении задания" style="margin-bottom:5px" onkeyup="checkParams()"   >
+            <input type='file' name="file" id="file" >
+<!--            <input type=submit value=Upload>-->
+            {% if task_detail.check==True%}
+            <a href="/All_tasks/{{task_detail.id}}/retry" class="btn btn-success">Не выполнено</a>
+            {%else%}
+
+            <input type="submit" id="submit" class="btn btn-warning" value="Выполнено" disabled><br>
+            {%endif%}
+            {%endif%}
+
+        </form>
+        <form class="form-inline" method="post">
+        </form>
+
+
+
+        {% if task_detail.who==current_user.user_id%}
+        <a href="/All_tasks/{{task_detail.id}}/delete" class="btn btn-danger">Удалить </a>
+        <a href="/All_tasks/{{task_detail.id}}/redact" class="btn btn-warning">Редактировать</a>
+
+        {%endif%}
+
+
+
+
+
+
+    </div>
+</div>
+{% endblock %}

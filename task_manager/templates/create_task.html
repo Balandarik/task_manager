@@ -1,0 +1,29 @@
+{% extends 'main_tamplates.html' %}
+
+{% block title %}
+Add task
+{% endblock %}
+
+{% block main %}
+<div class = "container mt-1">
+    <h1>Добавление задания</h1>
+    <form method="post">
+        <select name="names" id="names" class="form-select" aria-label="Default select example">
+
+        {% if users|length>0 %}
+            <option selected>Выберите исполнителя</option>
+            {% for element in users %}
+            <option value="{{element.user_id}}">{{element.name}}</option>
+            {% endfor%}
+                <textarea name="task" id="task" class="form-control" placeholder="Введите текст задания" style="margin-top:5px"></textarea><br>
+        <input type="submit" class="btn btn-success" value="Отправить"><br>
+        {% else %}
+            <option selected>Пока еще нет зарегестрированных пользователей</option>
+        {% endif %}
+    </select>
+
+
+
+    </form>
+</div>
+{% endblock %}

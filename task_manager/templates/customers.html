@@ -1,0 +1,39 @@
+{% extends 'main_tamplates.html' %}
+
+{% block title %}
+All users
+{% endblock %}
+
+{% block main %}
+<div class = "container mt-1">
+    <h1>Все пользователи</h1>
+    <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Имя</th>
+                  <th scope="col">Телефон</th>
+                  <th scope="col">Email</th>
+
+                </tr>
+              </thead>
+              <div>
+                <tr>
+    {% if users|length>0 %}
+
+        {% for element in users %}
+
+                  <th scope="row">{{element.user_id}}</th>
+                  <td>  <a href="/customers/{{element.user_id}}">{{element.name}}</a></td>
+                  <td>{{element.tel}}</td>
+                  <td>{{element.email}}</td>
+
+
+                </tr>
+        {% endfor %}
+
+    {% else %}
+    <p class="m-b-0">Пока еще нет пользователей</p>
+    {% endif %}
+              </div>
+{% endblock %}

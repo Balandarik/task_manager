@@ -1,0 +1,48 @@
+{% extends 'main_tamplates.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block main %}
+<div class = "container mt-1">
+    <h1>Авторизация</h1>
+
+    <form class="form-inline" method="post">
+        <div class="row">
+            <div class="col">
+      <div class="form-group mb-2">
+        <input type="text"  name="user_name" class="form-control" id="staticEmail2" placeholder="Введите логин">
+      </div>
+        </div>
+            <div class="col">
+      <div class="form-group mb-2">
+        <input type="password" name="password" class="form-control" id="inputPassword2" placeholder="Введите пароль">
+      </div>
+        </div>
+            <div class="col">
+            <input type="submit" class="btn btn-warning" value="Авторизация"><br>
+        </div>
+            </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">    </div>
+            <div class="col">
+<!--                <div class="pull-right">-->
+            <a href="/register" class="btn btn-success">Регистрация</a>
+<!--                </div>-->
+            </div>
+        </div>
+
+    </form>
+
+</div>
+{% endblock %}

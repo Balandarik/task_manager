@@ -1,0 +1,31 @@
+{% extends 'main_tamplates.html' %}
+
+{% block title %}
+User details
+{% endblock %}
+
+{% block main %}
+<div class="container mt-3">
+<div class="row">
+<div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+<div class="well profile">
+<div class="col-sm-12">
+<div class="col-xs-12 col-sm-8">
+<h2>{{user.name}}</h2>
+<p><strong>Телефон: </strong> {{user.tel}} </p>
+<p><strong>Email: </strong> {{user.email}} </p>
+<p><strong>Дата регистрации:  </strong>{{user.date.date()}}</p>
+<p><strong>Статус пользователя:  </strong>
+    {%if user.role=="admin"%}
+    Администратор
+    {%else%}
+    Пользователь
+    {%endif%}
+</p>
+</div>
+</div>
+    </div>
+</div>
+</div>
+    </div>
+{% endblock %}
